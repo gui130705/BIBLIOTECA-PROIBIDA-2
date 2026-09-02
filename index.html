@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>📚 Biblioteca Proibida</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+#header {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+  padding: 25px 50px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+}
+
+#logo {
+  font-size: 32px;
+  font-weight: 900;
+  color: #E50914;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+}
+
+#nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+#nav button {
+  background: rgba(229, 9, 20, 0.8);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+#nav button:hover {
+  background: #E50914;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
+}
+
+/* HERO / CAPA */
+#hero {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d0a0a 50%, #0f0f0f 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.3;
+  background: radial-gradient(circle at 20% 50%, rgba(229, 9, 20, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(200, 16, 46, 0.15) 0%, transparent 50%);
+  animation: heroGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+  from { opacity: 0.2; }
+  to { opacity: 0.4; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: heroSlideUp 1s ease-out;
+  max-width: 100%;
+}
+
+@keyframes heroSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  font-size: 72px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 20px rgba(229, 9, 20, 0.5);
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  color: #ccc;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.hero-description {
+  font-size: 16px;
+  color: #aaa;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: inline-flex;
+  gap: 20px;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 16px 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary {
+  background: #E50914;
+  color: white;
+  box-shadow: 0 8px 30px rgba(229, 9, 20, 0.4);
+}
+
+.btn-primary:hover {
+  background: #ff0f1f;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(229, 9, 20, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-secondary:hover {
+  background: white;
+  color: #0f0f0f;
+  transform: translateY(-4px);
+}
+
+/* BIBLIOTECA */
+#library {
+  padding: 80px 50px;
+  background: linear-gradient(to bottom, rgba(15,15,15,0.5), #0f0f0f);
+  display: none;
+}
+
+#library.active {
+  display: block;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.section-title {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 40px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(229, 9, 20, 0.3);
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.book-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(229, 9, 20, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.book-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(229, 9, 20, 0.3);
+  border-color: rgba(229, 9, 20, 0.4);
+}
+
+.book-poster {
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(135deg, #E50914 0%, #8B0000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid #8B7355;
+  border-right: 8px solid #4a3a2a;
+  border-bottom: 8px solid #4a3a2a;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.book-poster::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shine 3s infinite;
+  z-index: 1;
+}
+
+.book-poster-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Poster Inner Content */
+.poster-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(2px);
+  border-radius: 4px;
+}
+
+.poster-title {
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.3);
+  color: #f0e68c;
+}
+
+.poster-subtitle {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.95);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* Capa Baruque - Azul e Dourado - Estilo Livro Antigo */
+.posterBaruque {
+  background: linear-gradient(135deg, #0B3D7A 0%, #1a5f9f 30%, #0f2644 100%) !important;
+  background-attachment: fixed;
+  position: relative;
+  box-shadow: inset -3px -3px 10px rgba(0,0,0,0.8), inset 3px 3px 10px rgba(255,215,0,0.2);
+}
+
+.posterBaruque::before {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.1) 10%, transparent 20%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+.posterBaruque::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,215,0,0.1) 2px, rgba(255,215,0,0.1) 4px),
+    radial-gradient(circle at 20% 50%, rgba(255,215,0,0.2) 0%, transparent 50%);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Capa Suzana - Rosa e Roxo */
+.posterSuzana {
+  background: linear-gradient(135deg, #5D4E60 0%, #8B4789 40%, #3d2a3d 100%) !important;
+  background-attachment: fixed;
+  position: relative;
+  box-shadow: inset -3px -3px 10px rgba(0,0,0,0.8), inset 3px 3px 10px rgba(255,192,203,0.15);
+}
+
+.posterSuzana::before {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255,192,203,0.1) 10%, transparent 20%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+.posterSuzana::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,192,203,0.1) 2px, rgba(255,192,203,0.1) 4px),
+    radial-gradient(circle at 30% 30%, rgba(255,192,203,0.2) 0%, transparent 50%);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Capa Eclesiástico - Verde e Ouro */
+.posterEclesiastico {
+  background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 40%, #0d3314 100%) !important;
+  background-attachment: fixed;
+  position: relative;
+  box-shadow: inset -3px -3px 10px rgba(0,0,0,0.8), inset 3px 3px 10px rgba(255,235,59,0.15);
+}
+
+.posterEclesiastico::before {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255,235,59,0.1) 10%, transparent 20%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+.posterEclesiastico::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,235,59,0.1) 2px, rgba(255,235,59,0.1) 4px),
+    radial-gradient(circle at 20% 50%, rgba(255,235,59,0.2) 0%, transparent 50%);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Capa Pai Nosso - Branco e Dourado */
+.posterPaiNosso {
+  background: linear-gradient(135deg, #F5DEB3 0%, #E8D4B8 40%, #c9a56c 100%) !important;
+  background-attachment: fixed;
+  position: relative;
+  box-shadow: inset -3px -3px 10px rgba(0,0,0,0.3), inset 3px 3px 10px rgba(255,255,255,0.3);
+}
+
+.posterPaiNosso .poster-title,
+.posterPaiNosso .poster-subtitle {
+  color: #2d2d2d;
+  text-shadow: 0 2px 8px rgba(255,255,255,0.7);
+  z-index: 3;
+  position: relative;
+}
+
+.posterPaiNosso::before {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.15) 10%, transparent 20%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+.posterPaiNosso::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139,69,19,0.08) 2px, rgba(139,69,19,0.08) 4px),
+    radial-gradient(circle at 50% 50%, rgba(255,215,0,0.2) 0%, transparent 60%);
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* Capa Enoque - Indigo e Prata */
+.posterEnoque {
+  background: linear-gradient(135deg, #1A0B4D 0%, #2D1B7E 40%, #0d0520 100%) !important;
+  background-attachment: fixed;
+  position: relative;
+  box-shadow: inset -3px -3px 10px rgba(0,0,0,0.8), inset 3px 3px 10px rgba(192,192,192,0.15);
+}
+
+.posterEnoque::before {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(192,192,192,0.1) 10%, transparent 20%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+.posterEnoque::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(70,130,180,0.1) 2px, rgba(70,130,180,0.1) 4px),
+    radial-gradient(circle at 20% 50%, rgba(192,192,192,0.15) 0%, transparent 50%);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Capa Judite - Vermelho Profundo e Dourado */
+.posterJudite {
+  background: linear-gradient(135deg, #8B0000 0%, #C41E3A 40%, #4a0000 100%) !important;
+  background-attachment: fixed;
+  position: relative;
+  box-shadow: inset -3px -3px 10px rgba(0,0,0,0.8), inset 3px 3px 10px rgba(255,215,0,0.15);
+}
+
+.posterJudite::before {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.1) 10%, transparent 20%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+.posterJudite::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,215,0,0.1) 2px, rgba(255,215,0,0.1) 4px),
+    radial-gradient(circle at 20% 50%, rgba(255,215,0,0.2) 0%, transparent 50%);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Capa Esdras - Terracota e Laranja */
+.posterEsdras {
+  background: linear-gradient(135deg, #A0522D 0%, #CD853F 40%, #6b3410 100%) !important;
+  background-attachment: fixed;
+  position: relative;
+  box-shadow: inset -3px -3px 10px rgba(0,0,0,0.8), inset 3px 3px 10px rgba(255,165,0,0.15);
+}
+
+.posterEsdras::before {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255,165,0,0.1) 10%, transparent 20%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+.posterEsdras::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(210,105,30,0.1) 2px, rgba(210,105,30,0.1) 4px),
+    radial-gradient(circle at 20% 50%, rgba(255,165,0,0.2) 0%, transparent 50%);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.book-info {
+  padding: 25px;
+}
+
+.book-title {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  color: #E50914;
+}
+
+.book-desc {
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.book-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+}
+
+.rating {
+  color: #FFD700;
+  font-weight: bold;
+}
+
+/* VIEWER */
+#viewer {
+  display: none;
+  min-height: 100vh;
+  padding-top: 80px;
+  background: #0f0f0f;
+}
+
+#viewer.active {
+  display: block;
+}
+
+.viewer-header {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+}
+
+.viewer-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.viewer-controls {
+  display: flex;
+  gap: 15px;
+}
+
+.viewer-controls button {
+  background: #E50914;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.viewer-controls button:hover {
+  background: #ff0f1f;
+  transform: scale(1.05);
+}
+
+#viewer-content {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pdf-frame {
+  width: 100%;
+  height: 800px;
+  border: 2px solid rgba(229, 9, 20, 0.2);
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* RESPONSIVO */
+/* Desktop/Tablets grandes (1024px+) */
+@media (min-width: 1024px) {
+  #header {
+    padding: 25px 50px;
+    height: auto;
+  }
+
+  #logo {
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+
+  #nav {
+    gap: 30px;
+  }
+
+  #nav button {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+
+  #hero {
+    height: 100vh;
+    min-height: 100vh;
+    padding-top: 80px;
+  }
+
+  .hero-title {
+    font-size: 72px;
+    margin-bottom: 20px;
+  }
+
+  .hero-subtitle {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    margin-bottom: 50px;
+    display: block;
+    max-width: 600px;
+  }
+
+  .hero-cta {
+    flex-direction: row;
+    gap: 20px;
+    width: auto;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: auto;
+    padding: 16px 40px;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .book-card {
+    border-radius: 12px;
+  }
+
+  .book-poster {
+    height: 400px;
+    border: 3px solid #8B7355;
+    border-right: 8px solid #4a3a2a;
+    border-bottom: 8px solid #4a3a2a;
+  }
+
+  .poster-inner {
+    padding: 40px;
+  }
+
+  .poster-title {
+    font-size: 48px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+  }
+
+  .poster-subtitle {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  #library {
+    padding: 80px 50px;
+    padding-top: 100px;
+  }
+
+  .section-title {
+    font-size: 42px;
+    margin-bottom: 40px;
+  }
+
+  .book-info {
+    padding: 25px;
+    display: block;
+  }
+
+  .book-title {
+    font-size: 18px;
+  }
+
+  .book-desc {
+    font-size: 13px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+
+  .book-meta {
+    font-size: 12px;
+  }
+
+  .viewer-header {
+    padding: 20px 50px;
+  }
+
+  .viewer-title {
+    font-size: 24px;
+  }
+
+  .viewer-controls {
+    gap: 15px;
+  }
+
+  .viewer-controls button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  #viewer-content {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .pdf-frame {
+    height: 800px;
+    border: 2px solid rgba(229, 9, 20, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Tablets (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  #header {
+    padding: 18px 30px;
+    height: auto;
+  }
+
+  #logo {
+    font-size: 24px;
+  }
+
+  #nav {
+    gap: 15px;
+  }
+
+  #nav button {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+
+  #hero {
+    padding-top: 70px;
+    min-height: 70vh;
+  }
+
+  .hero-title {
+    font-size: 48px;
+    margin-bottom: 15px;
+  }
+
+  .hero-subtitle {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    margin-bottom: 35px;
+    display: block;
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .book-poster {
+    height: 300px;
+  }
+
+  .poster-title {
+    font-size: 30px;
+    letter-spacing: 2px;
+  }
+
+  .poster-subtitle {
+    font-size: 14px;
+  }
+
+  #library {
+    padding: 60px 30px;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+  .book-info {
+    padding: 18px;
+    display: block;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E50914;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff0f1f;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="logo">📚 BIBLIOTECA PROIBIDA</div>
+  <div id="nav">
+    <button onclick="showHome()">Home</button>
+    <button onclick="showLibrary()">Biblioteca</button>
+  </div>
+</div>
+
+<!-- HERO / CAPA -->
+<div id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-title">BIBLIOTECA PROIBIDA</div>
+    <div class="hero-subtitle">Acervo Digital Sagrado</div>
+    <div class="hero-description">
+      Acesse uma coleção completa de livros apócrifos e textos sagrados em um ambiente moderno e imersivo. 
+      Explore, leia e descubra conhecimentos proibidos nesta biblioteca misteriosa.
+    </div>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="showLibrary()">Explorar Agora</button>
+      <button class="btn-secondary" onclick="scrollDown()">Saiba Mais ↓</button>
+    </div>
+  </div>
+</div>
+
+<!-- BIBLIOTECA -->
+<div id="library">
+  <h1 class="section-title">📚 Minha Biblioteca</h1>
+  
+    <!-- Livro 1 - Baruque -->
+    <div class="book-card" onclick="openDocument('gkp5s3dftm3b7lolsx8wk539spk4.html', 'Livro de Baruque')">
+      <div class="book-poster posterBaruque">
+        <div class="poster-inner">
+          <div class="poster-title">BARUQUE</div>
+          <div class="poster-subtitle">A Profecia Revelada</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">Livro de Baruque</div>
+        <div class="book-desc">Textos sagrados e proféticos</div>
+        <div class="book-meta">
+          <span>Bíblico</span>
+          <span class="rating">★★★★★</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Livro 2 - Oração e Suzana -->
+    <div class="book-card" onclick="openDocument('ptx0fskqran27t04cmjdp07g7rgr.html', 'Oração e Suzana')">
+      <div class="book-poster posterSuzana">
+        <div class="poster-inner">
+          <div class="poster-title">SUZANA</div>
+          <div class="poster-subtitle">Oração & Redenção</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">Oração e Suzana</div>
+        <div class="book-desc">Histórias de fé e salvação</div>
+        <div class="book-meta">
+          <span>Bíblico</span>
+          <span class="rating">★★★★★</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Livro 3 - Eclesiástico -->
+    <div class="book-card" onclick="openDocument('km7771crzyw4yqz9btgzn433l5zx.html', 'Livro do Eclesiástico')">
+      <div class="book-poster posterEclesiastico">
+        <div class="poster-inner">
+          <div class="poster-title">ECLESIÁSTICO</div>
+          <div class="poster-subtitle">Sabedoria Eterna</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">Livro do Eclesiástico</div>
+        <div class="book-desc">Ensinamentos de sabedoria</div>
+        <div class="book-meta">
+          <span>Bíblico</span>
+          <span class="rating">★★★★★</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Livro 4 - Pai Nosso Original -->
+    <div class="book-card" onclick="openDocument('uz37mk1ja76old0tx33egpiph8q2-_1_.html', 'Pai Nosso Original')">
+      <div class="book-poster posterPaiNosso">
+        <div class="poster-inner">
+          <div class="poster-title">PAI NOSSO</div>
+          <div class="poster-subtitle">Oração Original</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">Pai Nosso Original</div>
+        <div class="book-desc">A oração original de Jesus</div>
+        <div class="book-meta">
+          <span>Bíblico</span>
+          <span class="rating">★★★★★</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Livro 5 - Enoque -->
+    <div class="book-card" onclick="openDocument('ucne9yvfqxc8afrqbvdgdx6s7tvq.html', 'Livro de Enoque')">
+      <div class="book-poster posterEnoque">
+        <div class="poster-inner">
+          <div class="poster-title">ENOQUE</div>
+          <div class="poster-subtitle">Visões Celestiais</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">Livro de Enoque</div>
+        <div class="book-desc">Revelações dos céus</div>
+        <div class="book-meta">
+          <span>Bíblico</span>
+          <span class="rating">★★★★★</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Livro 6 - Judite -->
+    <div class="book-card" onclick="openDocument('913wrywgrey0dlktu2obl6omnlih.html', 'Livro de Judite')">
+      <div class="book-poster posterJudite">
+        <div class="poster-inner">
+          <div class="poster-title">JUDITE</div>
+          <div class="poster-subtitle">A Heroína Sagrada</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">Livro de Judite</div>
+        <div class="book-desc">História de coragem e fé</div>
+        <div class="book-meta">
+          <span>Bíblico</span>
+          <span class="rating">★★★★★</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Livro 7 - Esdras -->
+    <div class="book-card" onclick="openDocument('atqrm77dqnrosjrtiajx0wpqn4y8.html', 'Livro de Esdras')">
+      <div class="book-poster posterEsdras">
+        <div class="poster-inner">
+          <div class="poster-title">ESDRAS</div>
+          <div class="poster-subtitle">A Restauração</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">Livro de Esdras</div>
+        <div class="book-desc">Reconstrução e esperança</div>
+        <div class="book-meta">
+          <span>Bíblico</span>
+          <span class="rating">★★★★★</span>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- VIEWER -->
+<div id="viewer">
+  <div class="viewer-header">
+    <div class="viewer-title" id="viewer-title">Documento</div>
+    <div class="viewer-controls">
+      <button onclick="showLibrary()">← Voltar</button>
+    </div>
+  </div>
+  <div id="viewer-content">
+    <iframe id="pdf-frame" class="pdf-frame"></iframe>
+  </div>
+</div>
+
+<script>
+function showHome() {
+  document.getElementById('hero').style.display = 'flex';
+  document.getElementById('library').classList.remove('active');
+  document.getElementById('viewer').classList.remove('active');
+}
+
+function showLibrary() {
+  document.getElementById('hero').style.display = 'none';
+  document.getElementById('library').classList.add('active');
+  document.getElementById('viewer').classList.remove('active');
+}
+
+function openDocument(filename, title) {
+  document.getElementById('viewer-title').textContent = title;
+  document.getElementById('pdf-frame').src = filename;
+  document.getElementById('hero').style.display = 'none';
+  document.getElementById('library').classList.remove('active');
+  document.getElementById('viewer').classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function scrollDown() {
+  document.getElementById('library').classList.add('active');
+  document.getElementById('hero').style.display = 'none';
+  setTimeout(() => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }, 100);
+}
+
+// Inicializa mostrando a capa
+document.addEventListener('DOMContentLoaded', function() {
+  showHome();
+});
+</script>
+
+</body>
+</html>
