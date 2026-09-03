@@ -610,6 +610,42 @@ body {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
+.payment-box {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(229, 9, 20, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.book-price {
+  color: #FFD700;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.pix-key {
+  color: #ccc;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+.pix-button {
+  background: #168a45;
+  color: #fff;
+  border: none;
+  padding: 9px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.pix-button:hover {
+  background: #20ad5a;
+}
+
 /* RESPONSIVO */
 @media (max-width: 1024px) {
   .books-grid {
@@ -974,7 +1010,12 @@ body {
         </div>
       </div>
       <div class="book-info">
-        <div class="book-title">Livro de Baruque</div>
+                <div class="book-title">Livro de Baruque</div>
+        <div class="payment-box">
+          <div class="book-price">R$ 15,99</div>
+          <div class="pix-key">PIX: 11971616496</div>
+          <button class="pix-button" onclick="copyPix(event)">Copiar chave PIX</button>
+        </div>
         <div class="book-desc">Textos sagrados e proféticos</div>
         <div class="book-meta">
           <span>Bíblico</span>
@@ -992,7 +1033,12 @@ body {
         </div>
       </div>
       <div class="book-info">
-        <div class="book-title">Oração e Suzana</div>
+                <div class="book-title">Oração e Suzana</div>
+        <div class="payment-box">
+          <div class="book-price">R$ 15,99</div>
+          <div class="pix-key">PIX: 11971616496</div>
+          <button class="pix-button" onclick="copyPix(event)">Copiar chave PIX</button>
+        </div>
         <div class="book-desc">Histórias de fé e salvação</div>
         <div class="book-meta">
           <span>Bíblico</span>
@@ -1010,7 +1056,12 @@ body {
         </div>
       </div>
       <div class="book-info">
-        <div class="book-title">Livro do Eclesiástico</div>
+                <div class="book-title">Livro do Eclesiástico</div>
+        <div class="payment-box">
+          <div class="book-price">R$ 15,99</div>
+          <div class="pix-key">PIX: 11971616496</div>
+          <button class="pix-button" onclick="copyPix(event)">Copiar chave PIX</button>
+        </div>
         <div class="book-desc">Ensinamentos de sabedoria</div>
         <div class="book-meta">
           <span>Bíblico</span>
@@ -1028,7 +1079,12 @@ body {
         </div>
       </div>
       <div class="book-info">
-        <div class="book-title">Pai Nosso Original</div>
+                <div class="book-title">Pai Nosso Original</div>
+        <div class="payment-box">
+          <div class="book-price">R$ 15,99</div>
+          <div class="pix-key">PIX: 11971616496</div>
+          <button class="pix-button" onclick="copyPix(event)">Copiar chave PIX</button>
+        </div>
         <div class="book-desc">A oração original de Jesus</div>
         <div class="book-meta">
           <span>Bíblico</span>
@@ -1046,7 +1102,12 @@ body {
         </div>
       </div>
       <div class="book-info">
-        <div class="book-title">Livro de Enoque</div>
+                <div class="book-title">Livro de Enoque</div>
+        <div class="payment-box">
+          <div class="book-price">R$ 15,99</div>
+          <div class="pix-key">PIX: 11971616496</div>
+          <button class="pix-button" onclick="copyPix(event)">Copiar chave PIX</button>
+        </div>
         <div class="book-desc">Revelações dos céus</div>
         <div class="book-meta">
           <span>Bíblico</span>
@@ -1064,7 +1125,12 @@ body {
         </div>
       </div>
       <div class="book-info">
-        <div class="book-title">Livro de Judite</div>
+                <div class="book-title">Livro de Judite</div>
+        <div class="payment-box">
+          <div class="book-price">R$ 15,99</div>
+          <div class="pix-key">PIX: 11971616496</div>
+          <button class="pix-button" onclick="copyPix(event)">Copiar chave PIX</button>
+        </div>
         <div class="book-desc">História de coragem e fé</div>
         <div class="book-meta">
           <span>Bíblico</span>
@@ -1082,7 +1148,12 @@ body {
         </div>
       </div>
       <div class="book-info">
-        <div class="book-title">Livro de Esdras</div>
+                <div class="book-title">Livro de Esdras</div>
+        <div class="payment-box">
+          <div class="book-price">R$ 15,99</div>
+          <div class="pix-key">PIX: 11971616496</div>
+          <button class="pix-button" onclick="copyPix(event)">Copiar chave PIX</button>
+        </div>
         <div class="book-desc">Reconstrução e esperança</div>
         <div class="book-meta">
           <span>Bíblico</span>
@@ -1125,6 +1196,12 @@ function openDocument(filename, title) {
   document.getElementById('library').classList.remove('active');
   document.getElementById('viewer').classList.add('active');
   window.scrollTo(0, 0);
+}
+
+function copyPix(event) {
+  event.stopPropagation();
+  navigator.clipboard.writeText('11971616496');
+  alert('Chave PIX copiada: 11971616496');
 }
 
 function scrollDown() {
