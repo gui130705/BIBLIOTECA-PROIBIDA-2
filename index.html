@@ -1193,6 +1193,12 @@ function openDocument(filename, title) {
   window.scrollTo(0, 0);
 }
 
+function copyPix(event) {
+  event.stopPropagation();
+  navigator.clipboard.writeText('11971616496');
+  alert('Chave PIX copiada: 11971616496');
+}
+
 function scrollDown() {
   document.getElementById('library').classList.add('active');
   document.getElementById('hero').style.display = 'none';
